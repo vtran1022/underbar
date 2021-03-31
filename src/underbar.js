@@ -99,13 +99,16 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var falseElements = [];
-    _.each(collection, function(element, index) {
-      if (!test(element, index)) {
-        falseElements.push(element);
-      }
+    // var falseElements = [];
+    // _.each(collection, function(element, index) {
+    //   if (!test(element, index)) {
+    //     falseElements.push(element);
+    //   }
+    // });
+    // return falseElements;
+    return _.filter(collection, function(element) {
+      return !test(element);
     });
-    return falseElements;
   };
 
   // Produce a duplicate-free version of the array.
