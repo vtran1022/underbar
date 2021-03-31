@@ -106,13 +106,38 @@
     //   }
     // });
     // return falseElements;
-    return _.filter(collection, function(element) {
-      return !test(element);
+    return _.filter(collection, function(element, index) {
+      return !test(element, index);
     });
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    _.each(array, function(element) {
+      if (element < element + 1) {
+        isSorted = true;
+      } else {
+        isSorted = false;
+      }
+    });
+
+    var uniqElements = [];
+    if (isSorted) {
+      _.each(array, function(index) {
+        if (uniqElements[index] === undefined) {
+          uniqElements.push(index);
+        }
+      });
+    } else if (!isSorted) {
+      array.sort();
+      _.each(array, function(index) {
+        if (uniqElements[index] === undefined) {
+          uniqElements.push(index);
+        }
+      });
+    }
+
+    return uniqElements;
   };
 
 
