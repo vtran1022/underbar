@@ -86,10 +86,7 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
-    // create a truth variable that is an empty array
     var trueElements = [];
-    // set test equal to even or odd
-    // implent the each iterator function - it takes in the collection and the func takes in an element
     _.each(collection, function(element, index) {
       if (test(element, index)) {
         trueElements.push(element);
@@ -102,6 +99,13 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var falseElements = [];
+    _.each(collection, function(element, index) {
+      if (!test(element, index)) {
+        falseElements.push(element);
+      }
+    });
+    return falseElements;
   };
 
   // Produce a duplicate-free version of the array.
