@@ -87,9 +87,9 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var trueElements = [];
-    _.each(collection, function(element, index) {
-      if (test(element, index)) {
-        trueElements.push(element);
+    _.each(collection, function(item, index) {
+      if (test(item, index)) {
+        trueElements.push(item);
       }
     });
     return trueElements;
@@ -106,37 +106,38 @@
     //   }
     // });
     // return falseElements;
-    return _.filter(collection, function(element, index) {
-      return !test(element, index);
+    return _.filter(collection, function(item, index) {
+      return !test(item, index);
     });
   };
 
   // Produce a duplicate-free version of the array.
+  // how to use filter func in this
   _.uniq = function(array, isSorted, iterator) {
-    _.each(array, function(element) {
-      if (element < element + 1) {
+    _.each(array, function(item) {
+      if (item < item + 1) {
         isSorted = true;
       } else {
         isSorted = false;
       }
     });
-
     var uniqElements = [];
-    if (isSorted) {
-      _.each(array, function(index) {
-        if (uniqElements[index] === undefined) {
-          uniqElements.push(index);
+    if (typeof iterator === 'function') {
+// need to complete
+    } else if (isSorted) {
+      _.each(array, function(item) {
+        if (uniqElements[item] === undefined) {
+          uniqElements.push(item);
         }
       });
     } else if (!isSorted) {
       array.sort();
-      _.each(array, function(index) {
-        if (uniqElements[index] === undefined) {
-          uniqElements.push(index);
+      _.each(array, function(item) {
+        if (uniqElements[item] === undefined) {
+          uniqElements.push(item);
         }
       });
     }
-
     return uniqElements;
   };
 
@@ -146,6 +147,12 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var resultArray = [];
+    _.each(collection, function(item) {
+      var currentItem = iterator(item);
+      resultArray.push(currentItem);
+    });
+    return resultArray;
   };
 
   /*
