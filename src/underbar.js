@@ -112,7 +112,7 @@
   };
 
   // Produce a duplicate-free version of the array.
-  // how to use filter func in this
+  // how to use filter function in this
   _.uniq = function(array, isSorted, iterator) {
     _.each(array, function(item) {
       if (item < item + 1) {
