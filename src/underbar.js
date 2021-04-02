@@ -123,7 +123,27 @@
     });
     var uniqElements = [];
     if (typeof iterator === 'function') {
-// need to complete
+      var transformedElements = [];
+      var transformedIndexes = [];
+      for (var i = 0; i < array.length; i++) {
+        var transformedEle = iterator(array[i]);
+        transformedElements.push(transformedEle);
+        transformedIndexes.push(i);
+      }
+      var uniqTransEles = [];
+      var uniqTransIndexes = [];
+      for (var j = 0; j < transformedElements.length; j++) {
+        var transEle = transformedElements[j];
+        var transEleIndex = transformedIndexes[j];
+        if (uniqTransEles.indexOf(transEle) === -1) {
+          uniqTransEles.push(transEle);
+          uniqTransIndexes.push(transEleIndex);
+        }
+      }
+      for (var k = 0; k < uniqTransIndexes.length; k++) {
+        var currentEle = uniqTransIndexes[k];
+        uniqElements.push(array[currentEle]);
+      }
     } else if (isSorted) {
       _.each(array, function(item) {
         if (uniqElements[item] === undefined) {
@@ -210,11 +230,6 @@
     }
     return currentTotal;
   };
-
-
-  // if accumlator === undefined, set it equal to the first element of the collection then invoke the iterator starting on the second element
-
-
 
   // --------------------
   // ! END OF PART ONE !
