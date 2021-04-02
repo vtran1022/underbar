@@ -219,6 +219,15 @@
       }
     }
     return grandTotal;
+
+    // other code to try and use other underscore funcs
+    // accumulator = (_.first(collection, function(index) {
+    //   accumulator === undefined ? collection[0] : accumulator;
+    // }));
+
+    // _.map(collection, function(item) {
+    //   accumulator = iterator(accumulator, item);
+    // });
   };
 
   // --------------------
