@@ -38,15 +38,10 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    // return n === undefined ? array[array.length - 1] : array.slice(-n, array.length); other code I will get back to trying make work
-    if (n === undefined) {
-      return array[array.length - 1];
-    } else if (n > array.length) {
-      return array;
-    } else if (n === 0) {
+    if (n === 0) {
       return [];
     } else {
-      return array.slice(-n);
+      return n === undefined ? array[array.length - 1] : array.slice(-n, array.length);
     }
   };
 
