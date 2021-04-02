@@ -94,13 +94,6 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    // var falseElements = [];
-    // _.each(collection, function(element, index) {
-    //   if (!test(element, index)) {
-    //     falseElements.push(element);
-    //   }
-    // });
-    // return falseElements;
     return _.filter(collection, function(item, index) {
       return !test(item, index);
     });
@@ -209,18 +202,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    if (Array.isArray(collection)) {
-      if (accumulator === undefined) {
-        accumulator = collection[0];
-        for (var i = 1; i < collection.length; i++) {
-          var currentTotal = iterator(accumulator, collection[i]);
-          accumulator = currentTotal;
-        }
-      } else {
-        for (var j = 0; j < collection.length; j++) {
-          var currentTotal = iterator(accumulator, collection[j]);
-          accumulator = currentTotal;
-        }
+    if (accumulator === undefined) {
+      accumulator = collection[0];
+      for (var i = 1; i < collection.length; i++) {
+        var currentTotal = iterator(accumulator, collection[i]);
+        accumulator = currentTotal;
+      }
+    } else {
+      for (var j = 0; j < collection.length; j++) {
+        var currentTotal = iterator(accumulator, collection[j]);
+        accumulator = currentTotal;
       }
     }
     return currentTotal;
