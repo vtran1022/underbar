@@ -207,15 +207,13 @@
     if (accumulator === undefined) {
       accumulator = collection[0];
       for (var i = 1; i < collection.length; i++) {
-        var currentTotal = iterator(accumulator, collection[i]);
-        accumulator = currentTotal;
-        grandTotal = currentTotal;
+        accumulator = iterator(accumulator, collection[i]);
+        grandTotal = accumulator;
       }
     } else {
       for (var j = 0; j < collection.length; j++) {
-        var currentTotal = iterator(accumulator, collection[j]);
-        accumulator = currentTotal;
-        grandTotal = currentTotal;
+        accumulator = iterator(accumulator, collection[j]);
+        grandTotal = accumulator;
       }
     }
     return grandTotal;
