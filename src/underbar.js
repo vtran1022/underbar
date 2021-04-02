@@ -146,6 +146,7 @@
         }
       });
     }
+
     return uniqElements;
   };
 
@@ -202,19 +203,22 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    var grandTotal = 0;
     if (accumulator === undefined) {
       accumulator = collection[0];
       for (var i = 1; i < collection.length; i++) {
         var currentTotal = iterator(accumulator, collection[i]);
         accumulator = currentTotal;
+        grandTotal = currentTotal;
       }
     } else {
       for (var j = 0; j < collection.length; j++) {
         var currentTotal = iterator(accumulator, collection[j]);
         accumulator = currentTotal;
+        grandTotal = currentTotal;
       }
     }
-    return currentTotal;
+    return grandTotal;
   };
 
   // --------------------
