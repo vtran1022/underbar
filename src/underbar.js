@@ -203,29 +203,28 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    // var grandTotal = 0;
+    // if (accumulator === undefined) {
+    //   accumulator = collection[0];
+    //   for (var i = 1; i < collection.length; i++) {
+    //     accumulator = iterator(accumulator, collection[i]);
+    //     grandTotal = accumulator;
+    //   }
+    // } else {
+    //   for (var j = 0; j < collection.length; j++) {
+    //     accumulator = iterator(accumulator, collection[j]);
+    //     grandTotal = accumulator;
+    //   }
+    // }
+    // return grandTotal;
+
     var grandTotal = 0;
-    if (accumulator === undefined) {
-      accumulator = collection[0];
-      for (var i = 1; i < collection.length; i++) {
-        accumulator = iterator(accumulator, collection[i]);
-        grandTotal = accumulator;
-      }
-    } else {
-      for (var j = 0; j < collection.length; j++) {
-        accumulator = iterator(accumulator, collection[j]);
-        grandTotal = accumulator;
-      }
-    }
+    accumulator = accumulator === undefined ? _.first(collection) : accumulator;
+    _.each(collection, function(item) {
+      accumulator = iterator(accumulator, item);
+      grandTotal = accumulator;
+    });
     return grandTotal;
-
-    // other code to try and use other underscore funcs
-    // accumulator = (_.first(collection, function(index) {
-    //   accumulator === undefined ? collection[0] : accumulator;
-    // }));
-
-    // _.map(collection, function(item) {
-    //   accumulator = iterator(accumulator, item);
-    // });
   };
 
   // --------------------
@@ -262,7 +261,12 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    // return _.reduce();
   };
+
+  // I: collection - an array or object of values , iterator - a func that iterates over collection
+  // O: Boolean if all elements in collection matches a truth test
+  // C: None
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
