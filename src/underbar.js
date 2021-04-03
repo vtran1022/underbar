@@ -203,27 +203,21 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    // var grandTotal = 0;
-    // if (accumulator === undefined) {
-    //   accumulator = collection[0];
-    //   for (var i = 1; i < collection.length; i++) {
-    //     accumulator = iterator(accumulator, collection[i]);
-    //     grandTotal = accumulator;
-    //   }
-    // } else {
-    //   for (var j = 0; j < collection.length; j++) {
-    //     accumulator = iterator(accumulator, collection[j]);
-    //     grandTotal = accumulator;
-    //   }
-    // }
-    // return grandTotal;
-
     var grandTotal = 0;
-    accumulator = accumulator === undefined ? _.first(collection) : accumulator;
-    _.each(collection, function(item) {
-      accumulator = iterator(accumulator, item);
-      grandTotal = accumulator;
-    });
+    if (accumulator === undefined) {
+      accumulator = _.first(collection);
+      var collectionTwo = collection.slice();
+      collectionTwo.shift(accumulator);
+      _.each(collectionTwo, function(item) {
+        accumulator = iterator(accumulator, item);
+        grandTotal = accumulator;
+      });
+    } else {
+      _.each(collection, function(item) {
+        accumulator = iterator(accumulator, item);
+        grandTotal = accumulator;
+      });
+    }
     return grandTotal;
   };
 
