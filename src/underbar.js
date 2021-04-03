@@ -263,17 +263,21 @@
       if (!isTrue) {
         return false;
       }
-    }, false);
+      if (iterator === undefined) {
+        if (item) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (iterator(item)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }, true);
   };
-
-  // I: collection - an array or object of values , iterator - a func that iterates over collection
-  // O: Boolean if all elements in collection matches a truth test
-  // C: None
-  // E: none
-
-  // iterates over each element and determines if it passes the truth test
-  // if does not pass truth, return false
-  // if true, check the next item
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
