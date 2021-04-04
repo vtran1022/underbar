@@ -407,27 +407,14 @@
     var storedValues = {};
 
     return function () {
-// this fails test: should give different results for different arguments
-      // for (var i = 0; i < arguments.length; i++) {
-      //   if (arguments[i] in storedValues) {
-      //     return storedValues[arguments[i]];
-      //   } else {
-      //     var result = func.apply(null, arguments);
-      //     storedValues[arguments[i]] = result;
-      //     return result;
-      //   }
-      // }
-// this fails tests
-  // should not run the memoized function twice when given a primitive type as an argument
-  // should not run the memoized function twice when given a reference type as an argument
-      // var strArg = JSON.stringify(arguments);
-      // if (strArg in storedValues) {
-      //   return storedValues[arguments];
-      // } else {
-      //   var result = func.apply(null, arguments);
-      //   storedValues[arguments] = result;
-      //   return result;
-      // }
+      var strArg = JSON.stringify(arguments);
+      if (strArg in storedValues) {
+        return storedValues[arguments];
+      } else {
+        var result = func.apply(null, arguments);
+        storedValues[strArg] = result;
+        return result;
+      }
     };
   };
 
