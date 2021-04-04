@@ -393,6 +393,8 @@
     };
   };
 
+  // function.apply(null, arguments); - take this function and apply it to these parameters/arguments
+
   // Memorize an expensive function's results by storing them. You may assume
   // that the function only takes primitives as arguments.
   // memoize could be renamed to oncePerUniqueArgumentList; memoize does the
@@ -402,6 +404,31 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var storedValues = {};
+
+    return function () {
+// this fails test: should give different results for different arguments
+      // for (var i = 0; i < arguments.length; i++) {
+      //   if (arguments[i] in storedValues) {
+      //     return storedValues[arguments[i]];
+      //   } else {
+      //     var result = func.apply(null, arguments);
+      //     storedValues[arguments[i]] = result;
+      //     return result;
+      //   }
+      // }
+// this fails tests
+  // should not run the memoized function twice when given a primitive type as an argument
+  // should not run the memoized function twice when given a reference type as an argument
+      // var strArg = JSON.stringify(arguments);
+      // if (strArg in storedValues) {
+      //   return storedValues[arguments];
+      // } else {
+      //   var result = func.apply(null, arguments);
+      //   storedValues[arguments] = result;
+      //   return result;
+      // }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
