@@ -347,10 +347,6 @@
   // exists in obj
   _.defaults = function(obj) {
     var length = arguments.length;
-    if (length < 2) {
-      return obj;
-    }
-
     for (var i = 1; i < length; i++) {
       var currentObj = arguments[i];
       var keys = [];
